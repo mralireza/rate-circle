@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Rate circles</title>
+        <link rel="Stylesheet" type="text/css" href="style.css" title="style1" />
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+        <div id="rating-container">
+                <div class="rating-circle"></div>
+                <div class="rating-circle"></div>
+                <div class="rating-circle"></div>
+                <div class="rating-circle"></div>
+                <div class="rating-circle"></div>
+        </div>
+        <script>
+                $(function () {
+
+                        var circles = $('#rating-container div[class=rating-circle]');
+                        
+                        circles.hover(
+
+                                function () {
+
+                                        $('[data-click]').prevAll().addBack().removeClass('rating-chosen');
+                                        $(this).nextAll().removeClass('rating-hover');
+                                        $(this).prevAll().addBack().addClass('rating-hover');
+
+                                },
+                                function () {
+
+                                        $(this).prevAll().addBack().removeClass('rating-hover');
+                                        $('[data-click]').prevAll().addBack().addClass('rating-chosen');
+
+                                }
+                        
+                        );
+
+                        circles.click(function () {
+
+                                $('[data-click]').removeAttr('data-click');
+                                $(this).attr('data-click', 'true');
+                                $(this).prevAll().addBack().addClass('rating-chosen');
+                                $(this).nextAll().removeClass('rating-chosen');
+
+                        });
+                });
+        </script>
+</body>
+</html>
